@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+    .fakeimg {
+    height: 200px;
+    background: #aaa;
+    }
+    </style>
+
+    <style>
+            table, th, td
+            {
+                margin:10px 0;
+                border:solid 1px #333;
+                padding:2px 4px;
+                font:15px Verdana;
+            }
+            th {
+                font-weight:bold;
+            }
+
+    #loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid blue;
+      border-bottom: 16px solid blue;
+      width: 60px;
+      height: 60px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      visibility:hidden;
+    }
+
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    </style>
+
+    <script>
+
+    //App Script Published URL
+    var script_url = "https://script.google.com/macros/s/AKfycbzaClR91dWaO7XLLW9gjlBTsjyDVU1L6kNIotScw0PKMlV00Os/exec";
+
+    // Make an AJAX call to Google Script
+    function insert_value() {
+
+    $("#re").css("visibility","hidden");
+     document.getElementById("loader").style.visibility = "visible";
+    $('#mySpinner').addClass('spinner');
+
+    var id1=  $("#id").val();
+    var name= $("#name").val();
+
+
+      var url = script_url+"?callback=ctrlq&name="+name+"&id="+id1+"&action=insert";
+
+
+      var request = jQuery.ajax({
+        crossDomain: true,
+        url: url ,
+        method: "GET",
+        dataType: "jsonp"
+      });
+
+    }
+
+    function update_value(){
+    $("#re").css("visibility","hidden");
+       document.getElementById("loader").style.visibility = "visible";
+
+
+    var id1=  $("#id").val();
+    var name= $("#name").val();
+
+
+
+      var url = script_url+"?callback=ctrlq&name="+name+"&id="+id1+"&action=update";
+
+
+      var request = jQuery.ajax({
+        crossDomain: true,
+        url: url ,
+        method: "GET",
+        dataType: "jsonp"
+      });
+
+
+    }
+
+
+    function delete_value(){
+    $("#re").css("visibility","hidden");
+       document.getElementById("loader").style.visibility = "visible";
+    $('#mySpinner').addClass('spinner');
+    var id1=  $("#id").val();
+    var name= $("#name").val();
+
+
+      var url = script_url+"?callback=ctrlq&name="+name+"&id="+id1+"&action=delete";
+
+
+      var request = jQuery.ajax({
+        crossDomain: true,
+        url: url ,
+        method: "GET",
+        dataType: "jsonp"
+      });
+
+    }
+
+
+
+
+    // print the returned data
+    function ctrlq(e) {
+
+
+    $("#re").html(e.result);
+    $("#re").css("visibility","visible");
+    read_value();
+
+    }
+
+
+
+
+  function read_value() {
+
+  $("#re").css("visibility","hidden");
+
+     document.getElementById("loader").style.visibility = "visible";
+   var url = script_url+"?action=read";
+
+  $.getJSON(url, function (json) {
+
+      // Set the variables from the results array
+
+
+
+
+          // CREATE DYNAMIC TABLE.
+          var table = document.createElement("table");
+
+
+
+          var header = table.createTHead();
+      var row = header.insertRow(0);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+
+      cell1.innerHTML = "<b>ID</b>";
+      cell2.innerHTML = "<b>Name</b>";
+
+          // ADD JSON DATA TO THE TABLE AS ROWS.
+          for (var i = 0; i < json.records.length; i++) {
+
+              tr = table.insertRow(-1);
+          var tabCell = tr.insertCell(-1);
+                  tabCell.innerHTML = json.records[i].ID;
+          tabCell = tr.insertCell(-1);
+          tabCell.innerHTML = json.records[i].NAME;
+              }
+
+
+          // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+          var divContainer = document.getElementById("showData");
+          divContainer.innerHTML = "";
+          divContainer.appendChild(table);
+      document.getElementById("loader").style.visibility = "hidden";
+      $("#re").css("visibility","visible");
+      });
+    }
+
+  </script>
+
+  <title>Feedback - Johnny Benitez's Personal Web Site</title>
+
+</head>
+
+<body>
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+      <h1>Success Bootstrap Page</h1>
+      <p>Resize this responsive page to see the effect!</p>
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <a class="navbar-brand" href="#">Navigation</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">About Me</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="portfolio.html">Solution Portfolio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="feedback.html">Contact Me</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container" style="margin-top:30px">
+      <div class="row">
+        <div class="col">
+            <p> <h3> Connect with me </h3> </p>
+
+            You can connect with me thru Facebook Messenger, Instagram, Email, What's App, Viber, Telegram, SMS, Postal Mail or via this form.
+          </div>
+      </div>
+    </div>
+
+    <form >
+    ID
+    <input type = "text" name ="id" id="id">
+    Name
+    <input type = "text" name ="name" id="name">
+
+    </form>
+
+      <div id="loader"></div>
+
+    <p id="re"></p>
+
+    <input type = "button"  id = "b1" onClick="insert_value()" value = "Insert"></input>
+    <input type="button" onclick="read_value()" value="Read" />
+    <input type="button" onclick="update_value()" value="Update" />
+    <input type="button" onclick="delete_value()" value="Delete" />
+    <a href="https://docs.google.com/spreadsheets/d/1G1c8IZgNRAOnduvXXIHOY2RrODQZ5t_GE5mKm3CywIE/edit?usp=sharing" target="_blank">Click here to open Spread Sheet </a>
+    <div id="showData"></div>
+    </div>
+
+</body>
+
+</html>

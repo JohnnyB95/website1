@@ -11,6 +11,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+      var baseurl = "https://rest-api-sheet-qfpivqmm4q-uc.a.run.app/4";
+      function loadPersons(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET",baseurl,true);
+        //var tblerror = "<table><tr><td>ERROR</td></tr></table>"
+        xmlhttp.onreadystatechange = function() {
+          if(xmlhttp.readyState ===4 && xmlhttp.status ===200){
+            var persons = JSON.parse(xmlhttp.responseText);
+            var tbltop = `<table border="1" align="center" width="50%">
+                <tr><th>Id</th><th>Name</th><th>Amount</th><th>Unit</th><th>Warehouse</th></tr>`;
+            //main table content we fill from data from the rest call
+            var main ="";
+              main += "<tr><td>"+persons.data.ingredient.id+"</td><td>"+persons.data.ingredient.name+"</td><td>"+persons.data.ingredient.amount+"</td><td>"+persons.data.ingredient.unit+"</td><td>"+persons.data.ingredient.warehouseLocation+"</td></tr>";
+            var tblbottom = "</table>";
+            var tbl = tbltop + main + tblbottom;
+            document.getElementById("personinfo").innerHTML = tbl;
+          }
+          else
+          {}
+        };
+        xmlhttp.send();
+      }
+      window.onload = function(){
+        loadPersons();
+      }
+    </script>
+
     <style>
     .fakeimg {
     height: 200px;
@@ -46,7 +75,7 @@
             <a class="nav-link" href="blog.html">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact Me</a>
+            <a class="nav-link" href="feedback.html">Contact Me</a>
           </li>
         </ul>
       </div>
@@ -70,6 +99,12 @@
           <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
         </div>
       </div>
+      <div class="row">
+        <div class="col-sm-12">
+            <p> This section demonstrates the ability to get inventory data from <a href="https://docs.google.com/spreadsheets/d/1d_-5gkzduy4Opv6m_KWIHJaMIUmyT1d6odExVuD_SSk/edit?usp=sharing">Google Sheets</a> via a REST API Service on Google Cloud RUN</p>
+        </div>
+        <div class="col" id="personinfo">
+         </div>
     </div>
 
 </body>
