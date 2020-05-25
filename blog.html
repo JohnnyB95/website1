@@ -80,8 +80,27 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
           <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
         </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-6" id="content"> </div>
+        <div class="col-sm-6" id="content2"> </div>
       </div>
     </div>
+
+<div id="content"></div>
+
+
+    <script>
+      function handleResponse(response) {
+        document.getElementById("content").innerHTML += "<h1>" + response.title + "</h1>" + response.content;
+      }
+    </script>
+    <script
+    src="https://www.googleapis.com/blogger/v3/blogs/270221555624500523/posts/6763589332052815451?callback=handleResponse&key=AIzaSyBq9Rj7FTTlUZH634wD3rblYXeNsDzVmLo"></script>
+    <!-- <script
+    src="https://www.googleapis.com/blogger/v3/blogs/3213900/posts/8398240586497962757?callback=handleResponse&key=YOUR-API-KEY"></script> -->
+
 
 </body>
 
