@@ -65,18 +65,8 @@
 
     <div class="container" style="margin-top:30px">
       <div class="row">
-        <div class="col-sm-4">
-          <h3>Column 1</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Column 2</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-        </div>
-        <div class="col-sm-4">
-          <h3>Column 3</h3>
+        <div class="col-sm-12">
+          <h1>Hello <span id="clientName"></span></h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
           <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
         </div>
@@ -86,28 +76,6 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#available-libraries -->
-
-    <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyDWu2rDyzGOONNkN9AdrGCW0slcKKbDRDI",
-        authDomain: "johnnyb-test1.firebaseapp.com",
-        databaseURL: "https://johnnyb-test1.firebaseio.com",
-        projectId: "johnnyb-test1",
-        storageBucket: "johnnyb-test1.appspot.com",
-        messagingSenderId: "638853048240",
-        appId: "1:638853048240:web:6d6a32349560bed9f89875"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-    </script>
-
-    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
 
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
@@ -116,7 +84,7 @@
 
     <script>
       // TODO: Replace the following with your app's Firebase project configuration
-    const firebaseConfig = {
+      const firebaseConfig = {
       apiKey: "AIzaSyDWu2rDyzGOONNkN9AdrGCW0slcKKbDRDI",
       authDomain: "johnnyb-test1.firebaseapp.com",
       databaseURL: "https://johnnyb-test1.firebaseio.com",
@@ -124,12 +92,40 @@
       storageBucket: "johnnyb-test1.appspot.com",
       messagingSenderId: "638853048240",
       appId: "1:638853048240:web:6d6a32349560bed9f89875"
-    };
+      };
 
 
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
+
+      function app() {
+        document.getElementByID("clientName").innerHTML = "there!"
+      }
+
+      window.onLoad = app;
+
+      var provider = new firebase.auth.GoogleAuthProvider();
+
+      firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // ...
+      }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
+
+
     </script>
+
 
 
 </body>
