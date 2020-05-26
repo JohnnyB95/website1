@@ -32,18 +32,18 @@ limitations under the License.
   <script src="/__/firebase/init.js"></script>
  -->
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
 
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
 
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
 
-    <!-- Previously loaded Firebase SDKs -->
-
-    <script>
-      // TODO: Replace the following with your app's Firebase project configuration
-      const firebaseConfig = {
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
       apiKey: "AIzaSyDWu2rDyzGOONNkN9AdrGCW0slcKKbDRDI",
       authDomain: "johnnyb-test1.firebaseapp.com",
       databaseURL: "https://johnnyb-test1.firebaseio.com",
@@ -51,13 +51,10 @@ limitations under the License.
       storageBucket: "johnnyb-test1.appspot.com",
       messagingSenderId: "638853048240",
       appId: "1:638853048240:web:6d6a32349560bed9f89875"
-      };
-
-
-      // // Initialize Firebase
-      // firebase.initializeApp(firebaseConfig);
-    </script>
-
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
   <script type="text/javascript">
 
@@ -154,9 +151,6 @@ limitations under the License.
     }
 
     window.onload = function() {
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-
       initApp();
     };
   </script>
