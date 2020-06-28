@@ -146,11 +146,17 @@
 
     You can connect with me thru Facebook Messenger, Instagram, Email, What's App, Viber, Telegram, SMS, Postal Mail or via this form.
 
-    <form action="thankyou.html">
-        <p> Feedback <input type="text">
-            <button type="submit" class="btn btn-primary">Submit</button></p>
+    <div class="alert">Your message has been sent</div>
+
+    <form id="feedbackForm">
+        <p> <label>Feedback</label> <input type="text" name="feedback" id="feedback">
+            <button type="submit" class="btn btn-primary" >Submit</button></p>
+
     </form>
     </div>
+
+<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script src="main.js"></script>
 
 </body>
 
