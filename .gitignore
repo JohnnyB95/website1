@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-# OS generated files #
-######################
-.DS_Store
-.DS_Store?
-=======
 
 # Created by https://www.gitignore.io/api/macos
 # Edit at https://www.gitignore.io/?templates=macos
@@ -40,4 +34,3 @@ Temporary Items
 scratch.txt
 
 # End of https://www.gitignore.io/api/macos
->>>>>>> 0571be4bf9a8ba343927b354a36c91fe9c35b603
