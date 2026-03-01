@@ -36,19 +36,21 @@ function submitFeedback(e){
   // Save message
   //saveMessage(name, company, email, phone, message, feedback);
   console.log(timestamp);
-  saveFeedback(timestamp,feedback);
+  saveFeedback(timestamp, feedback).then(function() {
+    // Show alert
+    document.querySelector('.alert').style.display = 'block';
 
+    // Hide alert after 3 seconds
+    setTimeout(function(){
+      document.querySelector('.alert').style.display = 'none';
+    }, 3000);
 
-  // Show alert
-  document.querySelector('.alert').style.display = 'block';
-
-  // Hide alert after 3 seconds
-  setTimeout(function(){
-    document.querySelector('.alert').style.display = 'none';
-  },3000);
-
-  // Clear form
-  document.getElementById('feedbackForm').reset();
+    // Clear form
+    document.getElementById('feedbackForm').reset();
+  }).catch(function(error) {
+    console.error('Failed to save feedback:', error);
+    alert('Failed to send your message. Please try again.');
+  });
 }
 
 // Function to get get form values
@@ -59,7 +61,7 @@ function getInputVal(id){
 // Save message to firebase
 function saveMessage(name, company, email, phone, message, feedback){
   var newMessageRef = messagesRef.push();
-  newMessageRef.set({
+  return newMessageRef.set({
     name: name,
     company:company,
     email:email,
@@ -72,7 +74,7 @@ function saveMessage(name, company, email, phone, message, feedback){
 // Save message to firebase
 function saveFeedback(timestamp, feedback){
   var newMessageRef = messagesRef.push();
-  newMessageRef.set({
+  return newMessageRef.set({
     timestamp: timestamp,
     feedback:feedback
   });

@@ -84,11 +84,15 @@
       var url = script_url+"?callback=ctrlq&name="+name+"&id="+id1+"&action=insert";
 
 
-      var request = jQuery.ajax({
+      jQuery.ajax({
         crossDomain: true,
-        url: url ,
+        url: url,
         method: "GET",
         dataType: "jsonp"
+      }).fail(function() {
+        document.getElementById("loader").style.visibility = "hidden";
+        $("#re").html("Error: Could not insert record. Please try again.");
+        $("#re").css("visibility", "visible");
       });
 
     }
@@ -106,13 +110,16 @@
       var url = script_url+"?callback=ctrlq&name="+name+"&id="+id1+"&action=update";
 
 
-      var request = jQuery.ajax({
+      jQuery.ajax({
         crossDomain: true,
-        url: url ,
+        url: url,
         method: "GET",
         dataType: "jsonp"
+      }).fail(function() {
+        document.getElementById("loader").style.visibility = "hidden";
+        $("#re").html("Error: Could not update record. Please try again.");
+        $("#re").css("visibility", "visible");
       });
-
 
     }
 
@@ -128,11 +135,15 @@
       var url = script_url+"?callback=ctrlq&name="+name+"&id="+id1+"&action=delete";
 
 
-      var request = jQuery.ajax({
+      jQuery.ajax({
         crossDomain: true,
-        url: url ,
+        url: url,
         method: "GET",
         dataType: "jsonp"
+      }).fail(function() {
+        document.getElementById("loader").style.visibility = "hidden";
+        $("#re").html("Error: Could not delete record. Please try again.");
+        $("#re").css("visibility", "visible");
       });
 
     }
@@ -197,6 +208,10 @@
           divContainer.appendChild(table);
       document.getElementById("loader").style.visibility = "hidden";
       $("#re").css("visibility","visible");
+      }).fail(function() {
+        document.getElementById("loader").style.visibility = "hidden";
+        $("#re").html("Error: Could not load data. Please try again.");
+        $("#re").css("visibility", "visible");
       });
     }
 

@@ -92,22 +92,36 @@
 
 
     <script>
-      function handleResponse(response) {
+      function handleResponse1(response) {
+        if (response.error) {
+          document.getElementById("content").innerHTML = "<p style='color:red'>Error loading blog post: " + response.error.message + "</p>";
+          return;
+        }
         document.getElementById("content").innerHTML += "<h1>" + response.title + "</h1>" + response.content;
       }
-    </script>
 
-    <script
-    src="https://www.googleapis.com/blogger/v3/blogs/270221555624500523/posts/6763589332052815451?callback=handleResponse&key=AIzaSyBq9Rj7FTTlUZH634wD3rblYXeNsDzVmLo"></script>
-
-    <script>
-      function handleResponse(response) {
+      function handleResponse2(response) {
+        if (response.error) {
+          document.getElementById("content2").innerHTML = "<p style='color:red'>Error loading blog post: " + response.error.message + "</p>";
+          return;
+        }
         document.getElementById("content2").innerHTML += "<h1>" + response.title + "</h1>" + response.content;
       }
-    </script>
 
-    <script
-    src="https://www.googleapis.com/blogger/v3/blogs/270221555624500523/posts/368422743162449439?callback=handleResponse&key=AIzaSyBq9Rj7FTTlUZH634wD3rblYXeNsDzVmLo"></script>
+      function loadBlogPost(postId, callbackName, targetId) {
+        var script = document.createElement("script");
+        script.src = "https://www.googleapis.com/blogger/v3/blogs/270221555624500523/posts/" + postId + "?callback=" + callbackName + "&key=AIzaSyBq9Rj7FTTlUZH634wD3rblYXeNsDzVmLo";
+        script.onerror = function() {
+          document.getElementById(targetId).innerHTML = "<p style='color:red'>Error: Could not load blog post.</p>";
+        };
+        document.body.appendChild(script);
+      }
+
+      window.addEventListener("load", function() {
+        loadBlogPost("6763589332052815451", "handleResponse1", "content");
+        loadBlogPost("368422743162449439", "handleResponse2", "content2");
+      });
+    </script>
 
 </body>
 
